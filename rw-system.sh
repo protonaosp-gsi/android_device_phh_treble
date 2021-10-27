@@ -693,6 +693,10 @@ if getprop ro.vendor.build.fingerprint |grep -q -e /ASUS_I006D:;then
     mount /vendor/etc/audio/ZS590KS/audio_policy_configuration_ZS590KS.xml /vendor/etc/audio/sku_$sku/audio_policy_configuration.xml
 fi
 
+if getprop ro.vendor.build.fingerprint | grep -qi samsung/a40; then
+    mount /system/phh/audio_policy_configuration_sec.xml /vendor/etc/audio_policy_configuration_sec.xml
+fi
+
 setprop ctl.stop console
 dmesg -n 1
     copyprop() {
