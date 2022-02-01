@@ -58,6 +58,8 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/rw-system.sh:system/bin/rw-system.sh \
 	device/phh/treble/phh-on-data.sh:system/bin/phh-on-data.sh \
 	device/phh/treble/phh-prop-handler.sh:system/bin/phh-prop-handler.sh \
+	device/phh/treble/empty:system/xbin/empty \
+	device/phh/treble/me.phh.superuser.apk:system/phh/me.phh.superuser.apk \
 	device/phh/treble/fixSPL/getSPL.arm:system/bin/getSPL
 
 PRODUCT_COPY_FILES += \

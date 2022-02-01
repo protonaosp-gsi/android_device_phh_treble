@@ -165,6 +165,28 @@ if [ "$1" == "persist.sys.phh.caf.audio_policy" ];then
     exit
 fi
 
+if [ "$1" == "persist.sys.phh.dynamic_superuser" ]; then
+    if [[ "$prop_value" != "false" && "$prop_value" != "true" ]] || [ -d /sbin/.magisk ]; then
+        exit 1
+    fi
+
+    if [[ "$prop_value" == "true" ]]; then
+        umount -l /system/xbin
+        cp -a /system/xbin /mnt/phh
+        cp /system/bin/phh-su /mnt/phh/xbin/su
+        mount /mnt/phh/xbin /system/xbin
+        restorecon -R /system/xbin
+        setprop ctl.start sudaemon
+        pm install -r /system/phh/me.phh.superuser.apk
+    else
+        pm uninstall -k me.phh.superuser
+        setprop ctl.stop sudaemon
+        umount -l /system/xbin
+        rm -rf /mnt/phh/xbin /data/su
+    fi
+    exit
+fi
+
 if [ "$1" == "persist.sys.phh.vsmart.dt2w" ];then
     if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
         exit 1
